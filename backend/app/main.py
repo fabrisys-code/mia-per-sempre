@@ -1,46 +1,65 @@
+# backend/app/main.py
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-import os
+from app.core.config import settings
+from app.api.endpoints import auth, users
 
-# Carica variabili ambiente
-load_dotenv()
-
-# Crea app FastAPI
+# Create FastAPI app
 app = FastAPI(
-    title=os.getenv("APP_NAME", "Mia Per Sempre API"),
-    version=os.getenv("APP_VERSION", "0.1.0"),
-    description="API per marketplace nuda proprietà",
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 
-# CORS Middleware
+# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:3000").split(","),
+    allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Health check endpoint
+# Include routers
+app.include_router(
+    auth.router, 
+    prefix=f"{settings.API_V1_STR}/auth",
+    tags=["authentication"]
+)
+
+app.include_router(
+    users.router,
+    prefix=f"{settings.API_V1_STR}/users",
+    tags=["users"]
+)
+
+
 @app.get("/")
 async def root():
+    """Root endpoint"""
     return {
-        "message": "Mia Per Sempre API",
-        "version": os.getenv("APP_VERSION", "0.1.0"),
-        "status": "running"
+        "message": f"{settings.APP_NAME} API",
+        "version": settings.APP_VERSION,
+        "docs": f"{settings.API_V1_STR}/docs"
     }
+
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "app": settings.APP_NAME,
+        "version": settings.APP_VERSION
+    }
 
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="0.0.0.0",
         port=8000,
-        reload=True
+        reload=settings.DEBUG
     )
