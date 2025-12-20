@@ -9,13 +9,27 @@ from app.schemas.user import (
     Token,
     TokenData
 )
+from app.schemas.property import (
+    PropertyBase,
+    PropertyCreate,
+    PropertyUpdate,
+    Property,
+    PropertyList
+)
 
 __all__ = [
+    # User schemas
     "UserBase",
     "UserCreate",
     "UserUpdate", 
     "User",
     "UserLogin",
     "Token",
-    "TokenData"
+    "TokenData",
+    # Property schemas
+    "PropertyBase",
+    "PropertyCreate",
+    "PropertyUpdate",
+    "Property",
+    "PropertyList"
 ]

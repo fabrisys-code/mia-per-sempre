@@ -74,6 +74,9 @@ class User(Base, BaseModel):
     # Soft Delete
     deleted_at = Column(DateTime)
     
+    # Relationships - QUI! Dopo tutti i Column, prima del __repr__
+    properties = relationship("Property", back_populates="owner", cascade="all, delete-orphan")
+    
     def __repr__(self):
         return f"<User {self.email} ({self.user_type})>"
     

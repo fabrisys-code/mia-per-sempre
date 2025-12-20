@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.endpoints import auth, users
+from app.api.endpoints import auth, users, properties  # ← Aggiunto properties
 
 # Create FastAPI app
 app = FastAPI(
@@ -32,6 +32,13 @@ app.include_router(
     users.router,
     prefix=f"{settings.API_V1_STR}/users",
     tags=["users"]
+)
+
+# ← NUOVO ROUTER
+app.include_router(
+    properties.router,
+    prefix=f"{settings.API_V1_STR}/properties",
+    tags=["properties"]
 )
 
 
