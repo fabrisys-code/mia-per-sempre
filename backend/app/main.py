@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.endpoints import auth, users, properties  # ← Aggiunto properties
+from app.api.endpoints import auth, users, properties, valuation  # ← Aggiunto valuation
 
 # Create FastAPI app
 app = FastAPI(
@@ -39,6 +39,13 @@ app.include_router(
     properties.router,
     prefix=f"{settings.API_V1_STR}/properties",
     tags=["properties"]
+)
+
+# ← NUOVO ROUTER VALUTAZIONE
+app.include_router(
+    valuation.router,
+    prefix=f"{settings.API_V1_STR}/valuation",
+    tags=["valutazione"]
 )
 
 
