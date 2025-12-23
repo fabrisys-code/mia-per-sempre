@@ -126,7 +126,15 @@ class Property(Base, BaseModel):
     
     # Relationships
     owner = relationship("User", back_populates="properties")
-    # images = relationship("PropertyImage", back_populates="property", cascade="all, delete-orphan")
+    
+    # ← RELAZIONE IMMAGINI (back_populates aggiornato)
+    images = relationship(
+        "PropertyImage",
+        back_populates="parent_property",
+        cascade="all, delete-orphan",
+        order_by="PropertyImage.display_order"
+    )
+    
     # documents = relationship("PropertyDocument", back_populates="property", cascade="all, delete-orphan")
     
     def __repr__(self):

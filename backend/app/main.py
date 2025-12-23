@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.endpoints import auth, users, properties, valuation  # ← Aggiunto valuation
+from app.api.endpoints import auth, users, properties, valuation, images  # ← Aggiunto images
 
 # Create FastAPI app
 app = FastAPI(
@@ -34,18 +34,23 @@ app.include_router(
     tags=["users"]
 )
 
-# ← NUOVO ROUTER
 app.include_router(
     properties.router,
     prefix=f"{settings.API_V1_STR}/properties",
     tags=["properties"]
 )
 
-# ← NUOVO ROUTER VALUTAZIONE
 app.include_router(
     valuation.router,
     prefix=f"{settings.API_V1_STR}/valuation",
     tags=["valutazione"]
+)
+
+# ← NUOVO ROUTER IMMAGINI
+app.include_router(
+    images.router,
+    prefix=f"{settings.API_V1_STR}/images",
+    tags=["images"]
 )
 
 

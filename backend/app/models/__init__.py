@@ -10,6 +10,7 @@ from app.models.property import (
     UsufructType,
     PaymentPreference
 )
+from app.models.property_image import PropertyImage  # ← NUOVO
 
 __all__ = [
     "Base",
@@ -21,5 +22,6 @@ __all__ = [
     "PropertyStatus",
     "EnergyClass",
     "UsufructType",
-    "PaymentPreference"
+    "PaymentPreference",
+    "PropertyImage",  # ← NUOVO
 ]
