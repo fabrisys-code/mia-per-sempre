@@ -1,0 +1,17 @@
+# Robots.txt per Mia Per Sempre
+# https://miapersempre.it
+
+User-agent: *
+Allow: /
+
+# Aree riservate
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+
+# Pagine di redirect
+Disallow: /properties/
+
+# Sitemap
+Sitemap: https://miapersempre.it/sitemap.xml

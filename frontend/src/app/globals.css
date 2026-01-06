@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== FONT IMPORTS ===== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:wght@400;600;700;900&display=swap");
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Brand Colors */
+  --color-primary: #2d5016;
+  --color-secondary: #d4af37;
+  --color-accent: #4a90e2;
+
+  /* Background */
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+
+  /* Spacing */
+  --header-height: 72px;
+}
+
+/* ===== BASE STYLES ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: var(--font-sans, "Inter", system-ui, sans-serif);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-bold tracking-tight;
+  }
+
+  /* Focus styles per accessibilità */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-600;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
+  }
+}
+
+/* ===== COMPONENT UTILITIES ===== */
+@layer components {
+  /* Container */
+  .container-app {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Bottoni */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-800 text-white hover:bg-primary-700;
+    @apply focus:ring-primary-600;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-500 text-gray-900 hover:bg-secondary-400;
+    @apply focus:ring-secondary-600;
+  }
+
+  .btn-accent {
+    @apply btn bg-accent-500 text-white hover:bg-accent-600;
+    @apply focus:ring-accent-500;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary-800 bg-transparent text-primary-800;
+    @apply hover:bg-primary-800 hover:text-white;
+    @apply focus:ring-primary-600;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-700 hover:bg-gray-100;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .badge-featured {
+    @apply badge bg-secondary-500 text-gray-900;
+  }
+
+  .badge-verified {
+    @apply badge bg-primary-800 text-white;
+  }
+
+  .badge-info {
+    @apply badge bg-accent-500 text-white;
+  }
+
+  .badge-success {
+    @apply badge bg-success text-white;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning text-white;
+  }
+
+  .badge-error {
+    @apply badge bg-error text-white;
+  }
+
+  /* Card */
+  .card {
+    @apply rounded-card bg-white p-6 shadow-card transition-all duration-300;
+    @apply hover:-translate-y-1 hover:shadow-card-hover;
+  }
+
+  .card-featured {
+    @apply card border-l-4 border-secondary-500;
+  }
+
+  /* Input */
+  .input {
+    @apply w-full rounded-lg border border-gray-300 px-4 py-3;
+    @apply transition-colors duration-200;
+    @apply focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-200;
+    @apply placeholder:text-gray-400;
+  }
+
+  .input-error {
+    @apply input border-error focus:border-error focus:ring-error/20;
+  }
+
+  /* Label */
+  .label {
+    @apply mb-2 block text-sm font-medium text-gray-700;
+  }
+
+  /* Link */
+  .link {
+    @apply text-primary-800 underline-offset-2 transition-colors;
+    @apply hover:text-primary-600 hover:underline;
+  }
+
+  /* Section headers */
+  .section-title {
+    @apply font-serif text-3xl font-bold text-gray-900 md:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-2 text-lg text-gray-600;
+  }
+}
+
+/* ===== CUSTOM UTILITIES ===== */
+@layer utilities {
+  /* Gradient backgrounds */
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #1a2f0d 0%, #2d5016 50%, #3a6b1e 100%);
+  }
+
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #2d5016, #3a6b1e);
+  }
+
+  .bg-gradient-secondary {
+    background: linear-gradient(135deg, #d4af37, #e4c76b);
+  }
+
+  .bg-gradient-gold-shine {
+    background: linear-gradient(135deg, #8b7324, #d4af37, #edd9a1);
+  }
+
+  /* Text gradient */
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-secondary-600 via-secondary-400 to-secondary-600 bg-clip-text text-transparent;
+  }
+
+  /* Aspect ratios comuni per immobili */
+  .aspect-property {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aspect-property-wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Animation delays */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
